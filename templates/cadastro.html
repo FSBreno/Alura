@@ -1,0 +1,38 @@
+{% extends "template.html" %}
+
+{% block conteudo %}
+
+<form  action="/cadastrar" method="post">     
+  <fieldset>
+    <legend>Cadastre-se:</legend>  
+    
+    <div>
+      <label for='cadastra'></label>
+      <input type='radio' name='cadastra' value='1' required id='cadastra'> Aluno  -
+      <input type='radio' name='cadastra' value='2'> Empresa
+    </div>
+    <br>
+    Nome:<input type="text" name="nome" required id='nome'>
+    <br>
+    <br>
+    Login:<input type="text" name="usuario" required id='usuario'>
+    <br>
+    <br>
+    Senha:<input type="password" name="senha" required id='senha'>
+    <br>
+    <br>
+    Telefone<input type="text" name="telefone">
+    <br>
+    <br>
+    Endereço<input type="text" name="endereco">
+    <br>       
+    <br>
+    <button class="btn btn-primary" type="submit">Cadastrar</button>  
+  </fieldset>
+</form>
+
+
+{% endblock %}
+{% block alerta %}
+
+{% endblock %}

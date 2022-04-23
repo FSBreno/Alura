@@ -1,0 +1,172 @@
+{% extends "template.html" %}
+{% block conteudo %}
+          
+<h3>    Bem Vindo(a) {{ nome[0] }} </h3>
+
+{% if plano %} 
+    <br>
+    <h5>Plano:</h5>
+    <h6>  
+        <ul id="plano" class="list">      
+        {% if plano[1] != None %} 
+            <li >{{ plano[0] }} - {{ plano[1] }}</li>
+        {% else %}
+            <li>Individual - {{ plano[0] }}</li>
+        {% endif %}
+        </ul>
+    </h6>
+    <br>
+{% else%}
+    {% if planos1 %}
+        <h5>Contrate um plano:</h5>
+        <form action="/contrataplano" method="post">
+            <select name="plano">
+                {% for plano in planos1 %}
+                    <option value={{ plano[0] }}>
+                        {{ plano[1] }} 
+                        {% if plano[2] %}
+                        - {{ plano[2] }}
+                        {% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Contratar</button> 
+        </form>
+    {% endif %}
+    <br>
+    {% if planos2 %}
+        <h5>Ou Selecione um plano corporativo:</h5>
+        <form action="/contrataplano" method="post">
+            <select name="plano">
+                {% for plano in planos2 %}
+                    <option value={{ plano[0] }}>
+                        {{ plano[1] }} 
+                        {% if plano[2] %}
+                        - {{ plano[2] }}
+                        {% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Contratar</button> 
+        </form>
+    {% endif %}
+    <br>
+{% endif %}
+
+{% if matriculas %} 
+    <h5>Cursos matriculados:</h5>
+    <h6>
+        <form action="/removermatricula" method="post">
+            {% for matricula in matriculas %}
+                <input type='radio' name='matricula' required id='matricula' value={{ matricula[2] }}> {{ matricula[0] }} - {{ matricula[1] }}
+                <br>
+            {% endfor %}
+            <br>
+            <button class="btn btn-primary" type="submit">Remover</button> 
+        </form>
+    </h6>
+    <br>
+{% endif %}
+
+{% if cursos %}
+    <h5>Adicione um curso:</h5>
+    <form action="/adicionacurso" method="post">
+        <select name="curso" required id='curso'>
+            {% for curso in cursos %}
+                <option value={{ curso[0] }}>{{ curso[1] }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Adicionar</button> 
+    </form>
+    <br>
+{% endif %}
+
+{% if alunos %}
+    <h5>Alunos associados:</h5>
+    <h6>
+        <ul id="alunos" class="list">
+        {% for aluno in alunos %}
+            <li>Nome: {{ aluno[0] }} - Matricula: {{ aluno[1] }}</li>
+        {% endfor %}
+        </ul>
+    </h6>   
+    <br>     
+{% endif %}
+
+{% if inativas %}
+    <h5>Matriculas Inativas:</h5>
+    <form action="/ativarmatricula" method="post">
+        <select name="matricula" required id='matricula'>
+            {% for inativa in inativas %}
+                <option value={{ inativa[0] }}>{{ inativa[1] }} - {{ inativa[2] }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Ativar</button> 
+    </form>
+    <br>
+{% endif %}
+
+{% if ativas %}
+    <h5>Matriculas ativas:</h5>
+    <form action="/desativarmatricula" method="post">
+        <select name="matricula" required id='matricula'>
+            {% for ativa in ativas %}
+                <option value={{ ativa[0] }}>{{ ativa[1] }} - {{ ativa[2] }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Desativar</button> 
+    </form>
+    <br>
+{% endif %}
+
+
+{% if area %} 
+    {% if empresa_inativa %}
+        <h5>Empresas Inativas:</h5>
+        <form action="/ativarempresa" method="post">
+            <select name="empresa">
+                {% for inativa in empresa_inativa %}
+                    <option value={{ inativa[0] }}>{{ inativa[1] }} - {{ inativa[2] }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Ativar</button> 
+        </form>
+    {% endif %}
+    <br>
+    {% if empresa_ativa %}
+        <h5>Empresas ativas:</h5>
+        <form action="/desativarempresa" method="post">
+            <select name="empresa">
+                {% for ativa in empresa_ativa %}
+                    <option value={{ ativa[0] }}>{{ ativa[1] }} - {{ ativa[2] }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Desativar</button> 
+        </form>
+        
+    {% endif %}  
+    <br>   
+    <li>
+        <div><h5>Àrea Administrativa:</h5>
+            <a href="/planos" >Planos</a>
+            <br>
+            <a href="/matriculas" >Matriculas</a>
+            <br>
+            <a href="/cursos" >Cursos</a>
+            <br>
+            <a href="/empresas" >Empresas</a>
+            <br>
+            <a href="/alunos" >Alunos</a>
+            <br>
+        </div>
+    </li>
+    <br>
+{% endif %}
+
+<br>
+
+<form  action="/sair" method="post">
+    <button class="btn alert" type="submit">Sair</button>
+</form>
+
+{% endblock %}

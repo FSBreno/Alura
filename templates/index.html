@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<form  action="/entrar" method="post">
+    <fieldset>
+        <label>
+            <legend>Fazer Log-In </legend>        
+            <p><label for="usuario">Usuário</label>
+            <input class="form-control" type="text" id= "usuario"name="usuario" required></p>
+            <label for="senha">Senha</label>
+            <input class="form-control" type="password" id="senha"name="senha" required>            
+            </p>
+            <p>  
+            <button class="btn btn-primary" type="submit">Entrar</button>
+            </p>
+        </label>
+        
+    </fieldset>
+</form>
+<p>ou <a href="/cadastro">cadastre-se</a></p>
+
+
+
+
+
+{% endblock %}

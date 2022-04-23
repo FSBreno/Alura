@@ -1,0 +1,64 @@
+create table alunos(
+id int auto_increment primary key,
+usuario varchar(40) not null unique,
+nome varchar(40),
+senha varchar(40) not null,
+id_plano int,
+telefone varchar(20),
+endereço varchar (40)
+
+);
+
+ALTER TABLE alunos ADD CONSTRAINT `fk_plano` FOREIGN KEY ( `id_plano` ) REFERENCES `planos` ( `id_plano` );
+
+__________________________________________________________________________________________________________________________________________
+
+create table matriculas(
+id_matricula int auto_increment primary key,
+id_aluno int not null,
+id_curso int not null,
+status varchar(30)
+);
+
+ALTER TABLE matriculas ADD CONSTRAINT `fk_aluno` FOREIGN KEY ( `id_aluno` ) REFERENCES `alunos` ( `id` );
+ALTER TABLE matriculas ADD CONSTRAINT `fk_curso` FOREIGN KEY ( `id_curso` ) REFERENCES `cursos` ( `id_curso` );
+
+_________________________________________________________________________________________________________________________________________
+
+create table planos(
+id_plano int auto_increment primary key,
+tipo varchar(20),
+id_empresa int,
+padrao int
+); 
+
+ALTER TABLE planos ADD CONSTRAINT `fk_empresa` FOREIGN KEY ( `id_empresa` ) REFERENCES `empresas` ( `id_empresa` ) ;
+__________________________________________________________________________________________________________________________________________
+
+create table cursos(
+id_curso int auto_increment primary keay,
+nome varchar(40) not null,
+carga_horaria int(4),
+investimento int(4),
+trilha varchar(40)
+);
+
+________________________________________________________________________________________________________________________________________
+
+create table empresas(
+id_empresa int auto_increment primary key,
+usuario varchar(40) unique not null,
+nome varchar(40),
+senha varchar(40) not null,
+ativa bool,
+telefone varchar(20),
+endereço varchar (40)
+);
+________________________________________________________________________________________________________________________________________
+
+create table administrador(
+usuario varchar(40) unique not null,
+nome varchar(40),
+senha varchar(40) not null,
+id_empresa int
+);
